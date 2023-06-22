@@ -20,7 +20,6 @@ let newId_bug = 0;
 
 var input_disease = 0;
 var input_bug = 0;
-var methodContent;
 
 $(document).ready(function() {
     //判斷病害，並post到json
@@ -122,7 +121,7 @@ $(document).ready(function() {
 
                 res_disease = response.records.disease;
                 newId_disease = res_disease.length + 1;
-                $('.list-unstyled').empty(); // 清空先前的資料
+                $('.list-1').empty(); // 清空先前的資料
                 sortedData.forEach(function(item){
                     let listItem = 
                         `<li>
@@ -140,7 +139,7 @@ $(document).ready(function() {
                                 </div>
                             </div>
                         </li>`;
-                    $('.list-unstyled').append(listItem);
+                    $('.list-1').append(listItem);
                 });
             },
             error: function(error) {
@@ -167,7 +166,7 @@ $(document).ready(function() {
 
                 res_bug = response.records.bug;
                 newId_bug = res_bug.length + 1;
-                $('.list-unstyled-2').empty(); // 清空先前的資料
+                $('.list-2').empty(); // 清空先前的資料
                 sortedData.forEach(function(item){
                     let listItem = 
                         `<li>
@@ -185,7 +184,7 @@ $(document).ready(function() {
                                 </div>
                             </div>
                         </li>`;
-                    $('.list-unstyled-2').append(listItem);
+                    $('.list-2').append(listItem);
                 });
             },
             error: function(error) {
@@ -285,7 +284,8 @@ $(document).ready(function() {
         type: 'GET',
         success: function(response) {
             console.log(response);
-            methodContent = response.method;
+            var methodContent = response.method;
+            console.log(methodContent);
             $('.x_title.soil-method').html('<h4>建議施肥措施: ' + methodContent + '</h4>');
             var newItem = '<li><p><input type="checkbox" class="flat">' + methodContent + '</p></li>';
             // 将新的列表项添加到相应的位置

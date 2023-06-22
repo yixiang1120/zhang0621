@@ -456,43 +456,6 @@
 
 
 
-            <!-- Start to do list -->
-            <div class="col-md-6 col-sm-4">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>To Do List <small>我的待辦清單</small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <!--
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
-                          class="fa fa-wrench"></i></a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Settings 1</a>
-                        <a class="dropdown-item" href="#">Settings 2</a>
-                      </div>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>-->
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="">
-                    <ul class="to_do">
-                      <li>
-                        <p>
-                          <input type="checkbox" class="flat"> Copy backups to offsite location
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End to do list -->
-
             <!-- start of weather widget -->
             <div class="col-md-6 col-sm-4 ">
               <div class="x_panel">
@@ -584,11 +547,41 @@
                   </div>
                 </div>
               </div>
-
             </div>
             <!-- end of weather widget -->
 
+            <!-- start of weather widget -->
+            <div class="animated flipInY col-md-6 col-sm-4">
+              <div class="tile-stats">
+                <div class="icon"><i class="fa fa-sun-o"></i></div>
+                <div class="count h_temperature">179</div>
+                <h3>最高溫度</h3>
+                <p class="time-text"></p>
+              </div>
+  
+              <div class="tile-stats">
+                <div class="icon"><i class="fa fa-cloud"></i></div>
+                <div class="count a_temperature">179</div>
+                <h3>平均溫度</h3>
+                <p class="time-text"></p>
+              </div>
+  
+              <div class="tile-stats">
+                <div class="icon"><i class="fa fa-umbrella"></i></div>
+                <div class="count rain">179</div>
+                <h3>降雨量</h3>
+                <p class="time-text"></p>
+              </div>
+              <div class="tile-stats">
+                <div class="icon"><i class="fa fa-tint"></i></div>
+                <div class="count humidity">179</div>
+                <h3>相對濕度</h3>
+                <p class="time-text"></p>
+              </div>
+            </div>
           </div>
+
+          <!-- end of row -->
           <div class="col-md-4 col-sm-4 ">
             <div class="x_panel">
               <div class="x_title">
@@ -828,14 +821,6 @@
                   </div>
                   <li class="dropdown">
                     <button type="button" class="btn btn-success btn-disease">送出</button>
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
-                        class="fa fa-wrench"></i></a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Settings 1</a>
-                      <a class="dropdown-item" href="#">Settings 2</a>
-                    </div>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>-->
                   </li>
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -845,7 +830,7 @@
               </div>
               <div class="x_content">
                 <div class="dashboard-widget-content">
-                  <ul class="list-unstyled timeline widget">
+                  <ul class="list-unstyled timeline widget list-1">
                   </ul>
                 </div>
               </div>
@@ -863,57 +848,66 @@
                   </div>
                   <li class="dropdown">
                     <button type="button" class="btn btn-success btn-bug">送出</button>
-                    <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
-                        class="fa fa-wrench"></i></a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Settings 1</a>
-                      <a class="dropdown-item" href="#">Settings 2</a>
-                    </div>
                   </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>-->
-                  </li>
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                 </ul>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
                 <div class="dashboard-widget-content">
-                  <ul class="list-unstyled-2 timeline widget">
+                  <ul class="list-unstyled timeline widget list-2">
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-          <div class="animated flipInY col-md-4 col-sm-4">
-            <div class="tile-stats">
-              <div class="icon"><i class="fa fa-sun-o"></i></div>
-              <div class="count h_temperature">179</div>
-              <h3>最高溫度</h3>
-              <p class="time-text"></p>
-            </div>
 
-            <div class="tile-stats">
-              <div class="icon"><i class="fa fa-cloud"></i></div>
-              <div class="count a_temperature">179</div>
-              <h3>平均溫度</h3>
-              <p class="time-text"></p>
-            </div>
 
-            <div class="tile-stats">
-              <div class="icon"><i class="fa fa-umbrella"></i></div>
-              <div class="count rain">179</div>
-              <h3>降雨量</h3>
-              <p class="time-text"></p>
+
+          
+
+            <!-- Start to do list -->
+            <div class="col-md-4 col-sm-4">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>To Do List <small>我的待辦清單</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <!--
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
+                          class="fa fa-wrench"></i></a>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Settings 1</a>
+                        <a class="dropdown-item" href="#">Settings 2</a>
+                      </div>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>-->
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="">
+                    <ul class="to_do">
+                      <li>
+                        <p>
+                          <input type="checkbox" class="flat"> Copy backups to offsite location
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="tile-stats">
-              <div class="icon"><i class="fa fa-tint"></i></div>
-              <div class="count humidity">179</div>
-              <h3>相對濕度</h3>
-              <p class="time-text"></p>
-            </div>
-          </div>
-        </div>
+            
+            <!-- End to do list -->
+
+
+
+
+          
         <!-- /page content -->
 
         <!-- footer content -->
