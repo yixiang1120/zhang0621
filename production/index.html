@@ -13,7 +13,7 @@
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
+  <!-- Font Awesoe -->
   <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- NProgress -->
   <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
@@ -210,7 +210,7 @@
                   <i class="fa fa-envelope-o"></i>
                   <span class="badge bg-green">6</span>
                 </a>
-                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                <ul class="dropdown-menu list-unstyled-3 msg_list" role="menu" aria-labelledby="navbarDropdown1">
                   <li class="nav-item">
                     <a class="dropdown-item">
                       <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
@@ -479,49 +479,8 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-
                   <div class="">
                     <ul class="to_do">
-                      <li>
-                        <p>
-                          <input type="checkbox" class="flat"> Schedule meeting with new client
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <input type="checkbox" class="flat"> Create email address for new intern
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <input type="checkbox" class="flat"> Have IT fix the network printer
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <input type="checkbox" class="flat"> Copy backups to offsite location
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <input type="checkbox" class="flat"> Create email address for new intern
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          <input type="checkbox" class="flat"> Have IT fix the network printer
-                        </p>
-                      </li>
                       <li>
                         <p>
                           <input type="checkbox" class="flat"> Copy backups to offsite location
@@ -555,18 +514,18 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="weather-icon">
-                        <canvas height="84" width="84" id="fog"></canvas>
+                        <canvas height="84" width="84" id="fog" data-icon="cloudy"></canvas>
                       </div>
                     </div>
                     <div class="col-sm-8">
-                      <div class="weather-text" id = "locationName">
+                      <div class="weather-text" id="locationName">
                         <h2>Texas <br><i>Partly Cloudy Day</i></h2>
                       </div>
                     </div>
                   </div>
                   <div class="col-sm-12">
                     <div class="weather-text pull-right">
-                      <h1 class="today_temp" >26 </h1>
+                      <h1 class="today_temp">26 </h1>
                     </div>
                   </div>
 
@@ -577,7 +536,7 @@
                       <div class="daily-weather">
                         <h2 class="day">Mon</h2>
                         <h3 class="degrees">25</h3>
-                        <canvas  id="clear-day" width="32" height="32"></canvas>
+                        <canvas id="" data-icon="cloudy" width="32" height="32"></canvas>
                         <h5>15 <i>km/h</i></h5>
                       </div>
                     </div>
@@ -585,7 +544,7 @@
                       <div class="daily-weather">
                         <h2 class="day">Tue</h2>
                         <h3 class="degrees">25</h3>
-                        <canvas height="32" width="32" id="rain"></canvas>
+                        <canvas height="32" width="32" id="" data-icon="cloudy"></canvas>
                         <h5>12 <i>km/h</i></h5>
                       </div>
                     </div>
@@ -593,7 +552,7 @@
                       <div class="daily-weather">
                         <h2 class="day">Wed</h2>
                         <h3 class="degrees">27</h3>
-                        <canvas height="32" width="32" id="snow"></canvas>
+                        <canvas height="32" width="32" id="" data-icon="cloudy"></canvas>
                         <h5>14 <i>km/h</i></h5>
                       </div>
                     </div>
@@ -601,7 +560,7 @@
                       <div class="daily-weather">
                         <h2 class="day">Thu</h2>
                         <h3 class="degrees">28</h3>
-                        <canvas height="32" width="32" id="sleet"></canvas>
+                        <canvas height="32" width="32" id="" data-icon="cloudy"></canvas>
                         <h5>15 <i>km/h</i></h5>
                       </div>
                     </div>
@@ -609,7 +568,7 @@
                       <div class="daily-weather">
                         <h2 class="day">Fri</h2>
                         <h3 class="degrees">28</h3>
-                        <canvas height="32" width="32" id="wind"></canvas>
+                        <canvas height="32" width="32" id="" data-icon="cloudy"></canvas>
                         <h5>11 <i>km/h</i></h5>
                       </div>
                     </div>
@@ -617,7 +576,7 @@
                       <div class="daily-weather">
                         <h2 class="day">Sat</h2>
                         <h3 class="degrees">26</h3>
-                        <canvas height="32" width="32" id="cloudy"></canvas>
+                        <canvas height="32" width="32" id="" data-icon="cloudy"></canvas>
                         <h5>10 <i>km/h</i></h5>
                       </div>
                     </div>
@@ -631,7 +590,7 @@
 
           </div>
           <div class="col-md-4 col-sm-4 ">
-            <div class="x_panel tile fixed_height_390">
+            <div class="x_panel">
               <div class="x_title">
                 <h2>土壤偵測</h2>
                 <ul class="nav navbar-right panel_toolbox">
@@ -880,7 +839,7 @@
                   </li>
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
-                  
+
                 </ul>
                 <div class="clearfix"></div>
               </div>
@@ -902,8 +861,6 @@
                       <textarea required="required" name='message-b'></textarea>
                     </div>
                   </div>
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
                   <li class="dropdown">
                     <button type="button" class="btn btn-success btn-bug">送出</button>
                     <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
@@ -913,8 +870,10 @@
                       <a class="dropdown-item" href="#">Settings 2</a>
                     </div>
                   </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>-->
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>-->
+                  </li>
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
                 </ul>
                 <div class="clearfix"></div>
               </div>
@@ -928,7 +887,7 @@
           </div>
           <div class="animated flipInY col-md-4 col-sm-4">
             <div class="tile-stats">
-              <div class="icon"><i class="fa fa-cloud"></i></div>
+              <div class="icon"><i class="fa fa-sun-o"></i></div>
               <div class="count h_temperature">179</div>
               <h3>最高溫度</h3>
               <p class="time-text"></p>
@@ -954,61 +913,61 @@
               <p class="time-text"></p>
             </div>
           </div>
-      </div>
-      <!-- /page content -->
-
-      <!-- footer content -->
-      <footer>
-        <div class="pull-right">
-          Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
         </div>
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
     </div>
-  </div>
 
-  <!-- jQuery -->
-  <script src="../vendors/jquery/dist/jquery.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- FastClick -->
-  <script src="../vendors/fastclick/lib/fastclick.js"></script>
-  <!-- NProgress -->
-  <script src="../vendors/nprogress/nprogress.js"></script>
-  <!-- Chart.js -->
-  <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-  <!-- gauge.js -->
-  <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
-  <!-- bootstrap-progressbar -->
-  <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-  <!-- iCheck -->
-  <script src="../vendors/iCheck/icheck.min.js"></script>
-  <!-- Skycons -->
-  <script src="../vendors/skycons/skycons.js"></script>
-  <!-- Flot -->
-  <script src="../vendors/Flot/jquery.flot.js"></script>
-  <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-  <script src="../vendors/Flot/jquery.flot.time.js"></script>
-  <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-  <script src="../vendors/Flot/jquery.flot.resize.js"></script>
-  <!-- Flot plugins -->
-  <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-  <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-  <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-  <!-- DateJS -->
-  <script src="../vendors/DateJS/build/date.js"></script>
-  <!-- JQVMap -->
-  <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-  <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-  <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-  <!-- bootstrap-daterangepicker -->
-  <script src="../vendors/moment/min/moment.min.js"></script>
-  <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../vendors/Flot/jquery.flot.js"></script>
+    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-  <!-- Custom Theme Scripts -->
-  <script src="../build/js/custom.js"></script>
-  <script src="tea.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.js"></script>
+    <script src="tea.js"></script>
 
 
 

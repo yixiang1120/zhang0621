@@ -20,10 +20,9 @@ let newId_bug = 0;
 
 var input_disease = 0;
 var input_bug = 0;
-
+var methodContent;
 
 $(document).ready(function() {
-
     //判斷病害，並post到json
     $('.btn-disease').click(function() {
         var message = $('textarea[name="message-d"]').val();
@@ -195,7 +194,6 @@ $(document).ready(function() {
         });
 
         //氣象
-        $(document).ready(function() {
             // 發送 AJAX 請求獲取數據
             $.ajax({
                 url: 'https://vmlabjsonserver.azurewebsites.net/weatherdata', // 替換為您的 API URL
@@ -219,18 +217,85 @@ $(document).ready(function() {
                     console.error(error); // 處理錯誤
                 }
             });
-        });
-        
     }, 2000);
 
+    //通知
+    $.ajax({
+        url: 'https://vmlabjsonserver.azurewebsites.net/notify', // 替換為您的 API URL
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            var records = response.records;
+            records.sort(function(a, b) {
+                // 按日期降序排序
+                var dateA = new Date(a.date);
+                var dateB = new Date(b.date);
+                if (dateA > dateB) {
+                    return -1;
+                    } else if (dateA < dateB) {
+                    return 1;
+                    } else {
+                    // 如果日期相同，则按ID降序排序
+                    if (a.id > b.id) {
+                        return -1;
+                    } else if (a.id < b.id) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                    }
+                });
+            var dropdownMenu = $('.dropdown-menu');
+            dropdownMenu.empty();
+            var todoList = $('.to_do');
+            todoList.empty();
+
+            records.forEach(function(record) {
+                var listItem = $('<li class="nav-item"></li>');
+                var anchor = $('<a class="dropdown-item"></a>');
+                var image = $('<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>');
+                var content = $('<span></span>');
+                var name = $('<span></span>').html('<strong>系統通知</strong>');
+                var time = $('<span class="time"></span>').text(record.date);
+                var message = $('<span class="message"></span>').text(record.question);
+        
+                content.append(name, time);
+                anchor.append(image, content, message);
+                listItem.append(anchor);
+                dropdownMenu.append(listItem);
+
+                if(record.answer != '') {
+                    var newItem = $('<li></li>');
+                    var checkbox = $('<input type="checkbox" class="flat">');
+                    var answer = $('<span class="answer"></span>').text(record.answer);
+
+                    newItem.append($('<p></p>').append(checkbox, answer));
+                    todoList.append(newItem);
+                    newItem.data('record-id', record.id);
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.log('error:', error);
+        }
+    });        
     //土壤方法
     $.ajax({
         url: 'https://vmlabjsonserver.azurewebsites.net/soilmethod',
         type: 'GET',
         success: function(response) {
             console.log(response);
-            var methodContent = response.method;
+            methodContent = response.method;
             $('.x_title.soil-method').html('<h4>建議施肥措施: ' + methodContent + '</h4>');
+            var newItem = '<li><p><input type="checkbox" class="flat">' + methodContent + '</p></li>';
+            // 将新的列表项添加到相应的位置
+            $('.to_do').append(newItem);
+            $('.to_do li:last-child').find('input.flat').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+        });
+        
+        todoinit();
         },
         error: function(error) {
             console.log(error);
@@ -352,38 +417,40 @@ $(document).ready(function() {
                 var day = moment(timeValueArray[index].time).format('ddd'); // 取得星期幾的縮寫
                 var degrees = timeValueArray[index].tValue;
                 var wx = timeValueArray[index].value;
-                //console.log(wx);
                 var humidity = timeValueArray[index].rhValue;
-                var weatherIcon = getWeatherIcon(wx); // 根據風速取得天氣圖示代碼
+                var weatherIconID = getWeatherIcon(wx, index); // 取得天氣圖示的ID
+                var weatherIcon = weatherIconID.split('-')[0]; // 去掉ID后面的数字
+                //console.log("icon:" + weatherIcon);
                 //console.log(weatherIcon);
                 // 更新每個天氣資訊的內容
                 $(this).find('.day').text(day);
                 $(this).find('.degrees').text(degrees);
-                $(this).find('canvas').attr('id', weatherIcon);
+                $(this).find('canvas').attr('id', weatherIconID);
+                $(this).find('canvas').attr('data-icon', weatherIcon); // 添加自定义属性以便识别天气图标
                 $(this).find('h5').text(humidity+ '％');
+                init_skycons();
             });
             
-            function getWeatherIcon(weatherDescription) {
+            function getWeatherIcon(weatherDescription, index) {
                 if (weatherDescription.includes('晴')) {
                     if (weatherDescription.includes('雲')) {
-                        return 'partly-cloudy-day';
+                        return 'partly-cloudy-day-' + index;
                     } else {
-                        return 'clear-day';
+                        return 'clear-day-' + index;
                     }
-                    } else if (weatherDescription.includes('雨')) {
-                    return 'rain';
-                    } else if (weatherDescription.includes('霧')) {
-                    return 'fog';
-                    } else if (weatherDescription.includes('雲')) {
-                    return 'cloudy';
-                    } else if (weatherDescription.includes('雪')) {
-                    return 'snow';
-                    } else {
+                } else if (weatherDescription.includes('雨')) {
+                    return 'rain-' + index;
+                } else if (weatherDescription.includes('霧')) {
+                    return 'fog-' + index;
+                } else if (weatherDescription.includes('雲')) {
+                    return 'cloudy-' + index;
+                } else if (weatherDescription.includes('雪')) {
+                    return 'snow-' + index;
+                } else {
                     // 如果無法判斷描述，回傳預設的圖示代碼
-                    return 'partly-cloudy-day';
-                    }
+                    return 'partly-cloudy-day-' + index;
                 }
-                init_skycons();
+            }
             },
             error: function(error) {
             console.log('發生錯誤：', error);
@@ -392,3 +459,45 @@ $(document).ready(function() {
 });
 
 
+function todoinit() {
+    $('input.flat').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass: 'iradio_flat-green'
+    }).on('ifChecked', function () {
+        var $input = $(this); // 保存当前输入框的引用
+        setTimeout(function () {
+            $input.closest('li').fadeOut(500, function () {
+                $(this).remove(); // 删除父级列表项
+            });
+        }, 2000); // 2秒的延迟时间
+    });
+}
+
+
+
+function init_skycons() {
+
+    if (typeof (Skycons) === 'undefined') { return; }
+    console.log('init_skycons');
+
+    var icons = new Skycons({
+        "color": "#73879C"
+    }),
+        list = [
+            "clear-day", "clear-night", "partly-cloudy-day",
+            "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+            "fog"
+        ],
+        i;
+
+        var weatherIcons = document.querySelectorAll('canvas[data-icon]');
+
+        for (var i = 0; i < weatherIcons.length; i++) {
+            var iconName = weatherIcons[i].getAttribute('data-icon');
+            icons.set(weatherIcons[i], iconName);
+            console.log(iconName);
+        }
+    
+    icons.play();
+
+}
