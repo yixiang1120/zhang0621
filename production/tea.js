@@ -38,6 +38,27 @@ var switch_rain = 0;
 
 var ready = 0;
 
+function getImagePath(keyword) {
+    const imageMapping = {
+        '瘤尺蠖蛾': 'images/bug1.jpg',
+        '黑點刺蛾': 'images/bug2.jpg',
+        '臺灣大蟋蟀': 'images/bug3.jpg',
+        '茶毒蛾': 'images/bug4.jpg',
+        '奎寧角盲椿象': 'images/bug5.jpg',
+    };
+
+    return imageMapping[keyword] || 'images/default.png';
+}
+
+function getImagePath2(keyword) {
+    const imageMapping = {
+        '赤葉枯病': 'images/disease1.png',
+        '褐色圓星病': 'images/disease2.png',
+    };
+
+    return imageMapping[keyword] || 'path/to/default.jpg';
+}
+
 $(document).ready(function() {
     //判斷病害，並post到json
     $('.btn-disease').click(function() {
@@ -139,8 +160,8 @@ $(document).ready(function() {
                 res_disease = response.records.disease;
                 newId_disease = res_disease.length + 1;
                 $('.list-1').empty(); // 清空先前的資料
-                sortedData.forEach(function(item){
-                    let listItem = 
+                sortedData.forEach(function(item) {
+                    let listItem =
                         `<li>
                             <div class="block">
                                 <div class="block_content">
@@ -149,13 +170,39 @@ $(document).ready(function() {
                                     </h2>
                                     <div class="byline">
                                         <span>${item.date}</span> by <a>Team095</a>
-                                    </div>
-                                    <p class="excerpt"> 
-                                        <a>${item.answer}</a>
-                                    </p>
-                                </div>
+                                    </div>`;
+                    
+                    const regex = /「([^」]+)」/g; // 从item.answer中提取被「」包围的内容
+                    const matches = item.answer.match(regex);
+
+                    if (matches) {
+                        listItem += `<div class="image-wrapper">`; // 添加包裹图像的div
+                    
+                        matches.forEach(function(match) {
+                            const keyword = match.slice(1, -1); // 去除「」
+                            const imagePath = getImagePath2(keyword);
+                            const image = document.createElement('img');
+                            image.src = imagePath;
+                            image.classList.add('keyword-image'); // 添加CSS类以控制样式
+                            const keywordName = document.createElement('p');
+                            keywordName.textContent = keyword;
+                            keywordName.classList.add('keyword-name'); // 添加CSS类以控制样式
+                            listItem += `
+                                <div class="image-container">
+                                    ${image.outerHTML}
+                                    ${keywordName.outerHTML}
+                                </div>`;
+                        });
+
+                        listItem += `</div>`; 
+                    }
+
+                    listItem += `<p class="excerpt"> 
+                                    <a>${item.answer}</a>
+                                </p>
                             </div>
-                        </li>`;
+                        </div>
+                    </li>`;
                     $('.list-1').append(listItem);
                 });
             },
@@ -184,8 +231,8 @@ $(document).ready(function() {
                 res_bug = response.records.bug;
                 newId_bug = res_bug.length + 1;
                 $('.list-2').empty(); // 清空先前的資料
-                sortedData.forEach(function(item){
-                    let listItem = 
+                sortedData.forEach(function(item) {
+                    let listItem =
                         `<li>
                             <div class="block">
                                 <div class="block_content">
@@ -194,13 +241,39 @@ $(document).ready(function() {
                                     </h2>
                                     <div class="byline">
                                         <span>${item.date}</span> by <a>Team095</a>
-                                    </div>
-                                    <p class="excerpt"> 
-                                        <a>${item.answer}</a>
-                                    </p>
-                                </div>
+                                    </div>`;
+                    
+                    const regex = /「([^」]+)」/g; // 从item.answer中提取被「」包围的内容
+                    const matches = item.answer.match(regex);
+
+                    if (matches) {
+                        listItem += `<div class="image-wrapper">`; // 添加包裹图像的div
+                    
+                        matches.forEach(function(match) {
+                            const keyword = match.slice(1, -1); // 去除「」
+                            const imagePath = getImagePath(keyword);
+                            const image = document.createElement('img');
+                            image.src = imagePath;
+                            image.classList.add('keyword-image'); // 添加CSS类以控制样式
+                            const keywordName = document.createElement('p');
+                            keywordName.textContent = keyword;
+                            keywordName.classList.add('keyword-name'); // 添加CSS类以控制样式
+                            listItem += `
+                                <div class="image-container">
+                                    ${image.outerHTML}
+                                    ${keywordName.outerHTML}
+                                </div>`;
+                        });
+
+                        listItem += `</div>`; 
+                    }
+
+                    listItem += `<p class="excerpt"> 
+                                    <a>${item.answer}</a>
+                                </p>
                             </div>
-                        </li>`;
+                        </div>
+                    </li>`;
                     $('.list-2').append(listItem);
                 });
             },
@@ -758,6 +831,27 @@ $('#myonoffswitch2').click(function() {
     else{
         switch_fans = 0;
         var statusText = document.getElementById("statusText2");
+        statusText.textContent = fullDate + " " + formattedTime + " 關閉";
+    }
+});
+
+$('#myonoffswitch3').click(function() {
+    if(this.checked)
+    {
+        if(rain_w < 100){
+            switch_rain = 1;
+            var statusText = document.getElementById("statusText3");
+            statusText.innerHTML = fullDate + " " + formattedTime + " 開啟";
+        }
+        if(rain_w >= 100){
+            alert("目前無需排水");
+            $('#myonoffswitch2').prop('checked', false);
+            switch_rain = 0;
+        }
+    }
+    else{
+        switch_rain = 0;
+        var statusText = document.getElementById("statusText3");
         statusText.textContent = fullDate + " " + formattedTime + " 關閉";
     }
 });
