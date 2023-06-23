@@ -205,10 +205,10 @@ $(document).ready(function() {
                     var date = response.record.weather[0].time;
                     console.log(location + ' ' + date);
                     // 更新計數值
-                    $('.count.h_temperature').text(weatherData.h_temperature);
-                    $('.count.a_temperature').text(weatherData.a_temperature);
-                    $('.count.humidity').text(weatherData.humidity);
-                    $('.count.rain').text(weatherData.rain);
+                    $('.count.h_temperature').text(weatherData.h_temperature + "°C");
+                    $('.count.a_temperature').text(weatherData.a_temperature + "°C");
+                    $('.count.humidity').text(weatherData.humidity + "%");
+                    $('.count.rain').text(weatherData.rain + "mm");
                     $('.time-text').text(date + "更新");
 
                 },
@@ -266,7 +266,8 @@ $(document).ready(function() {
                 if(record.answer != '') {
                     var newItem = $('<li></li>');
                     var checkbox = $('<input type="checkbox" class="flat">');
-                    var answer = $('<span class="answer"></span>').text(record.answer);
+                    var formattedAnswer = record.answer.replace(/(\d+\.)\s/g, "<br>$1 ");
+                    var answer = $('<span class="answer"></span>').html(formattedAnswer);
 
                     newItem.append($('<p></p>').append(checkbox, answer));
                     todoList.append(newItem);
