@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,6 +29,8 @@
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom.css" rel="stylesheet">
+  
 </head>
 
 <body class="nav-md">
@@ -669,6 +671,190 @@
 
 
           </div>
+
+
+          <div class="col-md-4 col-sm-6 ">
+            <div class="x_panel fixed_height_320">
+                <div class="x_title">
+                    <h2>
+                        灑水系統
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up">
+                                </i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="close-link">
+                                <i class="fa fa-close">
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix">
+                    </div>
+                </div>
+                <div class="x_content">
+                    <div class="dashboard-widget-content">
+                        <div class="sidebar-widget">
+                            <h4>
+                                土壤濕度
+                            </h4>
+                            <canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 160px; height: 100px;">
+                            </canvas>
+                            <div class="goal-wrapper">
+                                <span id="gauge-text" class="gauge-value gauge-chart pull-left">
+                                    0
+                                </span>
+                                <span class="gauge-value pull-left">
+                                    %
+                                </span>
+                                <span id="goal-text" class="goal-value pull-right">
+                                    100%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                            id="myonoffswitch" tabindex="0">
+                            <label class="onoffswitch-label" for="myonoffswitch">
+                                <span class="onoffswitch-inner">
+                                </span>
+                                <span class="onoffswitch-switch">
+                                </span>
+                            </label>
+                        </div>
+                        <p id="statusText">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 ">
+            <div class="x_panel fixed_height_320">
+                <div class="x_title">
+                    <h2>
+                        防霜扇
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up">
+                                </i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="close-link">
+                                <i class="fa fa-close">
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix">
+                    </div>
+                </div>
+                <div class="x_content">
+                    <div class="dashboard-widget-content">
+                        <div class="sidebar-widget">
+                            <h4>
+                                目前溫度
+                            </h4>
+                            <canvas width="150" height="80" id="chart_gauge_02" class="" style="width: 160px; height: 100px;">
+                            </canvas>
+                            <div class="goal-wrapper">
+                                <span id="gauge-text2" class="gauge-value gauge-chart pull-left">
+                                    0
+                                </span>
+                                <span class="gauge-value pull-left">
+                                    °C
+                                </span>
+                                <span id="goal-text2" class="goal-value pull-right">
+                                    40°C
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                        id="myonoffswitch2" tabindex="0">
+                        <label class="onoffswitch-label" for="myonoffswitch2">
+                            <span class="onoffswitch-inner">
+                            </span>
+                            <span class="onoffswitch-switch">
+                            </span>
+                        </label>
+                  
+                    </div>
+                    <p id="statusText2">
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-sm-6 ">
+            <div class="x_panel fixed_height_320">
+                <div class="x_title">
+                    <h2>
+                        自動排水措施
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up">
+                                </i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="close-link">
+                                <i class="fa fa-close">
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix">
+                    </div>
+                </div>
+                <div class="x_content">
+                    <div class="dashboard-widget-content">
+                        <div class="sidebar-widget">
+                            <h4>
+                                排水量
+                            </h4>
+                            <canvas width="150" height="80" id="chart_gauge_03" class="" style="width: 160px; height: 100px;">
+                            </canvas>
+                            <div class="goal-wrapper">
+                                <span class="gauge-value pull-left">
+                                </span>
+                                <span id="gauge-text3" class="gauge-value gauge-chart pull-left">
+                                    0
+                                </span>
+                                <span class="gauge-value pull-left">
+                                    %
+                                </span>
+                                <span id="goal-text3" class="goal-value pull-right">
+                                    100%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                        id="myonoffswitch3" tabindex="0">
+                        <label class="onoffswitch-label" for="myonoffswitch3">
+                            <span class="onoffswitch-inner">
+                            </span>
+                            <span class="onoffswitch-switch">
+                            </span>
+                        </label>
+                        
+                    </div>
+                    <p id="statusText3">
+                    </p>
+                </div>
+            </div>
+        </div>
 
 
           <!--<div class="col-md-4 col-sm-4 ">

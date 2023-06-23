@@ -12,6 +12,14 @@ date = (date < 10 ? "0" : "") + date;
 var fullDate = year + '/' + month + '/' + date;
 console.log(fullDate);
 
+var currentHour = today.getHours();
+var currentMinute = today.getMinutes();
+currentMinute = (currentMinute < 10 ? "0" : "") + currentMinute;
+
+var currentSecond = today.getSeconds();
+var formattedTime = currentHour + ":" + currentMinute;
+
+
 var res_disease;
 var res_bug;
 
@@ -20,6 +28,15 @@ let newId_bug = 0;
 
 var input_disease = 0;
 var input_bug = 0;
+var humidity_w = 59;
+var temp_w = 15;
+var rain_w = 0;
+
+var switch_water = 0;
+var switch_fans = 0;
+var switch_rain = 0;
+
+var ready = 0;
 
 $(document).ready(function() {
     //判斷病害，並post到json
@@ -193,7 +210,6 @@ $(document).ready(function() {
         });
 
         //氣象
-            // 發送 AJAX 請求獲取數據
             $.ajax({
                 url: 'https://vmlabjsonserver.azurewebsites.net/weatherdata', // 替換為您的 API URL
                 method: 'GET',
@@ -210,13 +226,15 @@ $(document).ready(function() {
                     $('.count.humidity').text(weatherData.humidity + "%");
                     $('.count.rain').text(weatherData.rain + "mm");
                     $('.time-text').text(date + "更新");
-
                 },
                 error: function(xhr, status, error) {
                     console.error(error); // 處理錯誤
-                }
+                },
+                
             });
     }, 2000);
+
+
 
     //通知
     $.ajax({
@@ -257,7 +275,6 @@ $(document).ready(function() {
                 var name = $('<span></span>').html('<strong>系統通知</strong>');
                 var time = $('<span class="time"></span>').text(record.date);
                 var message = $('<span class="message"></span>').text(record.question);
-        
                 content.append(name, time);
                 anchor.append(image, content, message);
                 listItem.append(anchor);
@@ -448,15 +465,62 @@ $(document).ready(function() {
                 } else if (weatherDescription.includes('雪')) {
                     return 'snow-' + index;
                 } else {
-                    // 如果無法判斷描述，回傳預設的圖示代碼
                     return 'partly-cloudy-day-' + index;
                 }
             }
-            },
-            error: function(error) {
+        },
+        error: function(error) {
             console.log('發生錯誤：', error);
-            }
+        }
     });
+    //自動灑水
+    $.ajax({
+        url: 'https://vmlabjsonserver.azurewebsites.net/switch_water', // 替換為您的 API URL
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            switch_water = response.switch;
+            humidity_w  = response.humidity;
+            if(switch_water == 1) {
+                $('#myonoffswitch').prop('checked', true); // 開啟開關
+                var statusText = document.getElementById("statusText");
+                statusText.innerHTML = fullDate + " " + formattedTime + " 開啟";
+            } else {
+                $('#myonoffswitch').prop('checked', false); // 關閉開關
+                var statusText = document.getElementById("statusText");
+                statusText.textContent = fullDate + " " + formattedTime + " 關閉";
+            }
+            //.log(switch_water);
+        },
+        error: function(xhr, status, error) {
+            console.error(error); // 處理錯誤
+        }
+    });
+
+    //防霜扇
+    $.ajax({
+        url: 'https://vmlabjsonserver.azurewebsites.net/switch_fans', // 替換為您的 API URL
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            switch_fans = response.switch;
+            temp_w  = response.temp;
+            console.log("tt", temp_w);
+            if(switch_fans == 1) {
+                $('#myonoffswitch').prop('checked', true); // 開啟開關
+                var statusText = document.getElementById("statusText2");
+                statusText.innerHTML = fullDate + " " + formattedTime + " 開啟";
+            } else {
+                $('#myonoffswitch').prop('checked', false); // 關閉開關
+                var statusText = document.getElementById("statusText2");
+                statusText.textContent = fullDate + " " + formattedTime + " 關閉";
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error(error); // 處理錯誤
+        }
+    });
+
 });
 
 
@@ -502,3 +566,198 @@ function init_skycons() {
     icons.play();
 
 }
+
+
+
+function init_gauge() {
+
+    if (typeof (Gauge) === 'undefined') { return; }
+
+    console.log('init_gauge [' + $('.gauge-chart').length + ']');
+
+    console.log('init_gauge');
+
+
+    var chart_gauge_settings = {
+        lines: 12,
+        angle: 0,
+        lineWidth: 0.4,
+        pointer: {
+            length: 0.75,
+            strokeWidth: 0.042,
+            color: '#1D212A'
+        },
+        limitMax: 'false',
+        colorStart: '#1ABC9C',
+        colorStop: '#1ABC9C',
+        strokeColor: '#F0F3F3',
+        generateGradient: true
+    };
+
+
+    setTimeout(function() {
+        if ($('#chart_gauge_01').length) {
+            var chart_gauge_01_elem = document.getElementById('chart_gauge_01');
+            var chart_gauge_01 = new Gauge(chart_gauge_01_elem).setOptions(chart_gauge_settings);
+        }
+
+        if ($('#gauge-text').length) {
+            chart_gauge_01.maxValue = 100;
+            chart_gauge_01.animationSpeed = 20;
+            chart_gauge_01.set(humidity_w);
+            console.log(humidity_w);
+            chart_gauge_01.setTextField(document.getElementById("gauge-text"));
+            var intervalId = setInterval(function() {
+                if (humidity_w < 80 && switch_water == 1) {
+                    humidity_w += 1;
+                    chart_gauge_01.animationSpeed = 20;
+                    chart_gauge_01.set(humidity_w);
+                } else {
+                    clearInterval(intervalId); 
+                }
+            }, 20000);   
+        }
+
+        if ($('#chart_gauge_02').length) {
+            var chart_gauge_02_elem = document.getElementById('chart_gauge_02');
+            var chart_gauge_02 = new Gauge(chart_gauge_02_elem).setOptions(chart_gauge_settings);
+        }
+    
+        if ($('#gauge-text2').length) {
+            chart_gauge_02.maxValue = 40;
+            chart_gauge_02.animationSpeed = 20;
+            chart_gauge_02.set(temp_w);
+            chart_gauge_02.setTextField(document.getElementById("gauge-text2"));
+            var intervalId = setInterval(function() {
+                if (temp_w < 19 && switch_fans == 1) {
+                    temp_w += 1;
+                    chart_gauge_02.animationSpeed = 20;
+                    chart_gauge_02.set(temp_w);
+                } else {
+                    clearInterval(intervalId); 
+                }
+            }, 30000);   
+        }
+
+
+        if ($('#chart_gauge_03').length) {
+            var chart_gauge_03_elem = document.getElementById('chart_gauge_03');
+            var chart_gauge_03 = new Gauge(chart_gauge_03_elem).setOptions(chart_gauge_settings);
+        }
+    
+        if ($('#gauge-text3').length) {
+            chart_gauge_03.maxValue = 200;
+            chart_gauge_03.animationSpeed = 20;
+            chart_gauge_03.set(temp_w);
+            chart_gauge_03.setTextField(document.getElementById("gauge-text3"));
+            var intervalId = setInterval(function() {
+                if (temp_w < 19 && switch_fans == 1) {
+                    temp_w += 1;
+                    chart_gauge_02.animationSpeed = 20;
+                    chart_gauge_02.set(temp_w);
+                } else {
+                    clearInterval(intervalId); 
+                }
+            }, 30000);   
+        }
+
+
+        if ($('#gauge-text3').length) {
+            chart_gauge_03.maxValue = 200;
+            chart_gauge_03.animationSpeed = 32;
+            chart_gauge_03.set(1);
+            chart_gauge_03.setTextField(document.getElementById("gauge-text3"));
+            $('#myonoffswitch3').click(function() {
+                if(this.checked)
+                {
+                    setTimeout(function() {
+                        chart_gauge_03.animationSpeed = 20000;
+                        chart_gauge_03.set(200);
+                    }, 4000);
+                }
+                else{
+                    chart_gauge_03.set(parseInt(document.getElementById("gauge-text3").textContent));
+                }
+            });
+        }
+
+
+    }, 4000); // 等待2000毫秒後開始第二次動畫
+
+    var checkGaugeValue = setInterval(function() {
+        var gaugeValue = document.getElementById("gauge-text").textContent;
+        humidity_w  = parseInt(gaugeValue);
+        if(humidity_w > 79) {
+            $('#myonoffswitch').prop('checked', false); // 关闭开关
+            switch_water = 0;
+            if(switch_water == 1) {
+                $('#myonoffswitch').prop('checked', true); // 開啟開關
+                var statusText = document.getElementById("statusText");
+                statusText.innerHTML = fullDate + " " + formattedTime + " 開啟";
+            } else {
+                $('#myonoffswitch').prop('checked', false); // 關閉開關
+                var statusText = document.getElementById("statusText");
+                statusText.textContent = fullDate + " " + formattedTime + " 關閉";
+            }
+            var update = {
+                "humidity": parseInt(humidity_w),
+                "switch": parseInt(switch_water)
+            };
+            $.ajax({
+                url: 'https://vmlabjsonserver.azurewebsites.net/switch_water', // 替換為您的 API URL
+                method: 'POST',
+                data: JSON.stringify(update),
+                contentType: 'application/json; charset=utf-8',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+            clearInterval(checkGaugeValue); // 停止定期检查
+        }
+    }, 10000);
+} 
+
+$('#myonoffswitch').click(function() {
+    if(this.checked)
+    {
+        if(humidity_w < 80){
+            switch_water = 1;
+            var statusText = document.getElementById("statusText");
+            statusText.innerHTML = fullDate + " " + formattedTime + " 開啟";
+        }
+        if(humidity_w == 80){
+            alert("目前已達到濕度標準，無需澆水");
+            $('#myonoffswitch').prop('checked', false); // 关闭开关
+            switch_water = 0;
+        }
+    }
+    else{
+        switch_water = 0;
+        var statusText = document.getElementById("statusText");
+        statusText.textContent = fullDate + " " + formattedTime + " 關閉";
+    }
+});
+
+$('#myonoffswitch2').click(function() {
+    if(this.checked)
+    {
+        if(temp_w < 19){
+            switch_fans = 1;
+            var statusText = document.getElementById("statusText2");
+            statusText.innerHTML = fullDate + " " + formattedTime + " 開啟";
+        }
+        if(temp_w >= 19){
+            alert("目前已達到溫度標準，無需開啟風扇");
+            $('#myonoffswitch2').prop('checked', false);
+            switch_fans = 0;
+        }
+    }
+    else{
+        switch_fans = 0;
+        var statusText = document.getElementById("statusText2");
+        statusText.textContent = fullDate + " " + formattedTime + " 關閉";
+    }
+});
