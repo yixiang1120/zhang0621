@@ -56,7 +56,7 @@ function getImagePath2(keyword) {
         '褐色圓星病': 'images/disease2.png',
     };
 
-    return imageMapping[keyword] || 'path/to/default.jpg';
+    return imageMapping[keyword] || 'images/default-d.png';
 }
 
 $(document).ready(function() {
